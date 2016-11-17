@@ -6,5 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     hook: new resources_1.Resource('hook', templatesDir),
     hookmanFile: new resources_1.Resource('hookman.json', templatesDir),
+    userHook: new resources_1.Resource('userHook', templatesDir),
 };
 //# sourceMappingURL=templates.js.map

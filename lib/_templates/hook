@@ -5,10 +5,10 @@ const fs = require('fs');
 const execFile = require('child_process').execFile;
 const exec = require('child_process').exec;
 
-const hookName = Path.basename(__filename);
-const userHooks = Path.join(__dirname, '../../hooks')
-const hookExecutable = Path.join(userHooks, hookName) 
-const hookExecutableExists = FS.existsSync(hookExecutable); 
+const hookName = path.basename(__filename);
+const userHooks = path.join(__dirname, '../../hooks')
+const hookExecutable = path.join(userHooks, hookName) 
+const hookExecutableExists = fs.existsSync(hookExecutable); 
 
 if (hookExecutableExists) {
   const child = execFile(hookExecutable, [], function (error, stdout, stderr) {

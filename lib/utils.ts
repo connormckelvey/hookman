@@ -1,4 +1,7 @@
 import * as Yargs from 'yargs';
+import * as Inquirer from 'inquirer';
+
+import { Resource } from './resources';
 
 function pad2(n: number) {
   return (n < 10 ? '0' : '') + n;
@@ -21,6 +24,30 @@ export function operationSuccess(message: string) {
 export function operationFailure(message: string, error: any) {
   console.log(message, error);
   process.exit(0);
+}
+
+export interface PromptResponse extends Inquirer.Answers {
+  shouldReplace?: boolean;
+  chosenHook?: string;
+}
+
+export async function replaceOrAbort(resource: Resource, abortMessage: string) {
+  const prompt = {
+    type: 'confirm',
+    name: 'shouldReplace',
+    message: `${resource.name} already exists. Would you like to replace it?`,
+    default: false,
+  };
+
+  if(resource.exists) {
+    const response = (await Inquirer.prompt([prompt])) as PromptResponse;
+    if (!response.shouldReplace) {
+      console.log(abortMessage);
+      return process.exit(0);
+    }
+  }
+
+  return;
 }
 
 export const hookList = [

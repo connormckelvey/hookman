@@ -7,7 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments)).next());
     });
 };
-const initializer_1 = require('./initializer');
+const Initializer = require('./initializer');
+const Creator = require('./creator');
 const resources_1 = require('./resources');
 const hookmanAlreadyInstalled = () => {
     return resources_1.default.gitDir.exists &&
@@ -19,19 +20,33 @@ const hookmanAlreadyInstalled = () => {
 };
 exports.init = (argv) => __awaiter(this, void 0, void 0, function* () {
     if (!resources_1.default.gitDir.exists) {
-        console.log('Error: Current directory is not a Git repository.');
+        console.log('Current directory is not a Git repository.');
         return;
     }
     if (hookmanAlreadyInstalled()) {
-        console.log('Error: Hookman already installed.');
+        console.log('Hookman already installed.');
         return;
     }
-    yield initializer_1.default.createHookmanFile();
-    yield initializer_1.default.createHooksDir();
-    yield initializer_1.default.createHooksBackupsDir();
-    yield initializer_1.default.backupExistingGitHooks();
-    yield initializer_1.default.createHookEntries();
-    yield initializer_1.default.makeHookEntriesExecutable();
+    yield Initializer.createHookmanFile();
+    yield Initializer.createHooksDir();
+    yield Initializer.createHooksBackupsDir();
+    yield Initializer.backupExistingGitHooks();
+    yield Initializer.createHookEntries();
+    yield Initializer.makeHookEntriesExecutable();
+    console.log(`\r\nSetup complete. You can now add command line executables to ${resources_1.default.hooksDir.path}`);
     return;
+});
+exports.create = (argv) => __awaiter(this, void 0, void 0, function* () {
+    if (!resources_1.default.gitDir.exists) {
+        console.log('Current directory is not a Git repository.');
+        return;
+    }
+    if (!hookmanAlreadyInstalled()) {
+        console.log('Hookman is not yet configured for this project.');
+        return;
+    }
+    const hook = new resources_1.Resource(yield Creator.promptForHookName(), resources_1.default.hooksDir.path);
+    yield Creator.createHook(hook);
+    yield Creator.makeHookExecutable(hook);
 });
 //# sourceMappingURL=commands.js.map

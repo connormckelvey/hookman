@@ -5,6 +5,7 @@ const Commands = require('./commands');
 const App = Yargs
     .usage('$0 <cmd> [args]')
     .command('init', 'Set up hookman', {}, utils_1.asyncWrapper(Commands.init))
+    .command('create', 'Create new hook executable', {}, utils_1.asyncWrapper(Commands.create))
     .command('install', 'Install scripts to .git', {}, (argv) => {
     console.log('hello', argv.name, 'welcome to yargs!');
 })
