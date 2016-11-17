@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+const process = require('process');
+const path = require('path');
+const fs = require('fs');
+const execFile = require('child_process').execFile;
+const exec = require('child_process').exec;
+
+const hookName = Path.basename(__filename);
+const userHooks = Path.join(__dirname, '../../hooks')
+const hookExecutable = Path.join(userHooks, hookName) 
+const hookExecutableExists = FS.existsSync(hookExecutable); 
+
+if (hookExecutableExists) {
+  const child = execFile(hookExecutable, [], function (error, stdout, stderr) {
+    
+    if (stderr) {
+      console.log(stderr);
+    }
+
+    if (stdout) {
+      console.log(stdout);
+    }
+
+    if (error) {
+      console.error('An error occured, please make sure your hook files have the correct permissions.');
+      process.exit(0); 
+    }
+
+    process.exit(0);    
+  });
+}

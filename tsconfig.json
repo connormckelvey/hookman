@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "target": "es6",
+    "outDir": "./dist/",
+    "allowJs": true,
+    "sourceMap": true,
+    "pretty": true
+  },
+  "exclude": [
+    "bin",
+    "dist",
+    "node_modules",
+    ".vscode"
+  ]
+}
