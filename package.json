@@ -1,6 +1,6 @@
 {
   "name": "hookman",
-  "version": "1.0.1",
+  "version": "0.0.0",
   "description": "Command line tool for tracking and distributing Githooks for your projects",
   "author": "Connor McKelvey",
   "keywords": [
@@ -13,6 +13,7 @@
     "build": "npm run dist:clean && tsc && cp -r lib/_templates dist/lib/_templates",
     "dist:clean": "rm -rf dist",
     "lint": "tslint \"./**/*.ts\" --exclude \"{./node_modules/**,./**/*.d.ts}\"",
+    "prepublish": "npm run build",
     "test": "npm run build && npm run test:fast",
     "test:ci": "npm run build && npm run test:ci:fast",
     "test:ci:fast": "mocha --require source-map-support/register --timeout 30000 --reporter mocha-multi --harmony --recursive dist/test-utils/initialize.js $(find ./dist/ -type d -name __test__)",

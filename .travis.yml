@@ -1,3 +1,8 @@
 language: node_js
 node_js:
-  - "6.2.1"
+- 6.2.1
+deploy:
+  on:
+    tags: true
+  api_key:
+    secure: mcpBwJxK4O0euQiS2bptQYeHyYRGLvYRK019gKZvGCAB4ZSbkBJjOks5UQZZJXJZNLhfmpebJGSlOX4ZhBgpRL5kIYWjP0x0dhjrREI60SYrve7nGvIwwJp/BJtWcbpwVyYFtkhCtfRnwwW++Ax3fXrf2zSCuzxI1OgqziGyz4x4Fgt3/1BSBXMMbecaJTyOLqya4w1ZvOP3w3/ea+5GpwyM41On8gnnPoofpvzC6hzQds0TFmjW79K05Gro54Nz/yGi1go53vM1GRA36z4wm6H0eVI4I2fOOCLXpkCsuEEVmTn/qSLcD0jGysqNaLly2QRPFSNZo1SfWcvWhuHB6CSxkvzYt6wKRINxV/ddaYL4yqkHh0+9rOif04113l3B8NBfGOuAiRFtw+HnG3Gq9rVpboGLWjk7ql4tab27WBLY2i+WEl2K1oAnblSygatkz8tSMbdQJfuHSBlbrtkrKlVMkyrDtKbiy0Gw1BlHFJWT62+LAsqBSEF+UahLQGSPK+efHr3Enf7yoQPXPtzsp6cFq4lTGwUFR54UFKDJ6LUDFu314osa26HxWrJ7Z4yZGosWi40iGPNt6lY0jqAia2N/GD0cG0kRwnDKEFsEsmp/T355hVHMujIUdBzC+qo3RLnM2q5jg3h+j7Xqn9xPw+hAaAheF0OSj+o5hggHEmk=
