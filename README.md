@@ -1,1 +1,1 @@
-# Hookman
+# Hookman ![Build Status](https://travis-ci.org/connormckelvey/hookman.svg?branch=master)
