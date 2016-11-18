@@ -1,6 +1,6 @@
 {
   "name": "hookman",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Command line tool for tracking and distributing Githooks for your projects",
   "author": "Connor McKelvey",
   "keywords": [
