@@ -3,7 +3,7 @@
   "pre-applypatch": "",
   "post-applypatch": "",
   "pre-commit": "npm run lint",
-  "pre-push": "npm run test && npm version patch",
+  "pre-push": "",
   "prepare-commit-msg": "",
   "commit-msg": "",
   "post-commit": "",
