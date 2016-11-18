@@ -7,7 +7,7 @@
     "git",
     "hooks"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
     "build": "npm run dist:clean && tsc && cp -r lib/_templates dist/lib/_templates",
