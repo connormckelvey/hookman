@@ -15,8 +15,13 @@ const abortMessage = 'Hookman init aborted';
 
 export async function createHookmanFile() {
   await replaceOrAbort(Resources.hookmanFile, abortMessage);
+  const contents = hookList.reduce((acc: any, cur: string) => {    
+    acc[cur] = '';
+    return acc;
+  }, {});
+
   try {
-    await FS.writeFile(Resources.hookmanFile.path, Templates.hookmanFile.contents);
+    await FS.writeFile(Resources.hookmanFile.path, JSON.stringify(contents, null, 2));
     success('hookman file created');
   } catch (e) {
     failure('hookman file could not be created', e);

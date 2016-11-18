@@ -58,6 +58,7 @@ export const hookList = [
   'pre-applypatch', 
   'post-applypatch', 
   'pre-commit', 
+  'pre-push',
   'prepare-commit-msg', 
   'commit-msg', 
   'post-commit', 
