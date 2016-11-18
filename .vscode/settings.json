@@ -6,7 +6,8 @@
     "**/.svn": true,
     "**/.DS_Store": true,
     "dist": true,
-    ".idea": true
+    ".idea": true,
+    "hooks/.backups": true
   },
   "editor.tabSize": 2,
   "javascript.validate.enable": false

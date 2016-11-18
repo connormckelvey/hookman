@@ -59,4 +59,5 @@ export default {
   hookmanFile: new Resource('hookman.json'),
   hooksBackupsDir:  new Resource('hooks/.backups'),
   hooksDir:  new Resource('hooks'),
+  hooksKeep: new Resource('hooks/.gitkeep'),
 };

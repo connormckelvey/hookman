@@ -1,16 +1,16 @@
 import * as Yargs from 'yargs';
 import * as Manage from '../manage';
 import Resources, { Resource } from '../resources';
-import { hookmanAlreadyInstalled, asyncWrapper } from '../utils';
+import { hookmanAlreadyInstalled, asyncWrapper, operationFailure as failure } from '../utils';
 
 const create = async (argv: Yargs.Argv) => {
   if (!Resources.gitDir.exists) {
-    console.log('Current directory is not a Git repository.');
+    failure('Current directory is not a Git repository.');
     return;
   }    
 
   if (!hookmanAlreadyInstalled()) {
-    console.log('Hookman is not yet configured for this project.');
+    failure('Hookman is not yet configured for this project.');
     return;
   }
 

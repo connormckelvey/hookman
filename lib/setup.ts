@@ -9,6 +9,7 @@ import {
   getTimestamp, 
   operationSuccess as success, 
   operationFailure as failure, 
+  sheBang,
   hookList } from './utils';
 
 const abortMessage = 'Hookman init aborted';
@@ -32,6 +33,7 @@ export async function createHooksDir() {
   await replaceOrAbort(Resources.hooksDir, abortMessage);
   try {
     await FS.mkdir(Resources.hooksDir.path);
+    await FS.writeFile(Resources.hooksKeep.path, '');
     success('hooks directory created');
   } catch (e) {
     failure('hooks directory could not be created', e);
@@ -80,7 +82,7 @@ export async function backupExistingGitHooks() {
 export async function createHookEntries() {
   try {
     for (let fileName of hookList) {
-      await FS.writeFile(Path.join(Resources.gitHooksDir.path, fileName), Templates.hook.contents);
+      await FS.writeFile(Path.join(Resources.gitHooksDir.path, fileName), sheBang + Templates.hook.contents);
     }
     success('hook entries created');
   } catch (e) {

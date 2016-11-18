@@ -3,6 +3,7 @@ import * as Path from 'path';
 
 import * as Yargs from 'yargs';
 import * as Inquirer from 'inquirer';
+import * as Colors from 'colors';
 
 import Resources, { Resource } from './resources';
 
@@ -21,11 +22,11 @@ export function getTimestamp() {
 }
 
 export function operationSuccess(message: string) {
-  console.log(message);
+  console.log(Colors.green(message));
 }
 
-export function operationFailure(message: string, error: any) {
-  console.log(message, error);
+export function operationFailure(message: string, error: any = '') {
+  console.log(Colors.red(message), error);
   process.exit(0);
 }
 
@@ -45,7 +46,7 @@ export async function replaceOrAbort(resource: Resource, abortMessage: string) {
   if (resource.exists) {
     const response = (await Inquirer.prompt([prompt])) as PromptResponse;
     if (!response.shouldReplace) {
-      console.log(abortMessage);
+      operationFailure(abortMessage);
       return process.exit(0);
     }
   }
@@ -93,3 +94,5 @@ export const hookmanAlreadyInstalled = () => {
   Resources.hooksDir.exists && 
   Resources.hooksDir.files.length;
 };
+
+export const sheBang = '#!/usr/bin/env node \n';

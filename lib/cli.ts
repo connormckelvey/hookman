@@ -4,7 +4,7 @@ import { getPackageJSON } from './utils';
 const meta = getPackageJSON();
 
 const App = Yargs
-  .usage('$0 <cmd> [args]')
+  .usage('$0 <cmd>')
   .commandDir('commands')
   .help()
   .version(meta.version)

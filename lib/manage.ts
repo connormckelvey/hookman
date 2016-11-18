@@ -8,6 +8,7 @@ import Templates from './templates';
 import {
   PromptResponse, 
   replaceOrAbort, 
+  sheBang,
   operationSuccess as success, 
   operationFailure as failure, 
   hookList } from './utils';
@@ -29,7 +30,7 @@ export async function promptForHookName() {
 export async function createHook(hook: Resource) {
   await replaceOrAbort(hook, abortMessage);
   try {
-    await FS.writeFile(hook.path, Templates.userHook.contents);
+    await FS.writeFile(hook.path, sheBang + Templates.userHook.contents);
     success(`${hook.name} hook created`);
   } catch (e) {
     failure(`${hook.name} hook could not be created`, e);

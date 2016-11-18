@@ -1,11 +1,11 @@
 import * as Yargs from 'yargs';
 import * as Setup from '../setup';
 import Resources from '../resources';
-import { hookmanAlreadyInstalled, asyncWrapper } from '../utils';
+import { hookmanAlreadyInstalled, asyncWrapper, operationSuccess as success, operationFailure as failure } from '../utils';
 
 const install = async(argv: Yargs.Argv) => {
   if (!Resources.gitDir.exists) {
-    console.log('Current directory is not a Git repository.');
+    failure('Current directory is not a Git repository.');
     return;
   }
 
@@ -14,7 +14,7 @@ const install = async(argv: Yargs.Argv) => {
   }
 
   if (!hookmanAlreadyInstalled()) {
-    console.log('Hookman is not yet configured for this project.');
+    failure('Hookman is not yet configured for this project.');
     return;
   }
     
@@ -22,7 +22,7 @@ const install = async(argv: Yargs.Argv) => {
   await Setup.createHookEntries();
   await Setup.makeHookEntriesExecutable();
 
-  console.log(`\r\nSetup complete. Your project's hooks are now configured for use with Git.`);
+  success(`\r\nSetup complete. Your project's hooks are now configured for use with Git.`);
 };
 
 export default install;
