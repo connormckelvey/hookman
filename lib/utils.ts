@@ -71,7 +71,7 @@ export const hookList = [
   'post-rewrite',
 ];
 
-export const asyncWrapper = (command: Function) => (argv: Yargs.Argv) => { 
+export const asyncWrapper = (command: Function) => (argv: Yargs.Argv) => {
   return new Promise((resolve, reject) => {
     command(argv).then(resolve);
   });
