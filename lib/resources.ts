@@ -37,7 +37,7 @@ export class Resource {
       return null;
     }
 
-    if(this.isFile) {
+    if (this.isFile) {
       return FS.readFileSync(this.path);
     }
   }
@@ -57,6 +57,6 @@ export default {
   gitDir: new Resource('.git'),
   gitHooksDir: new Resource('.git/hooks'),
   hookmanFile: new Resource('hookman.json'),
-  hooksDir:  new Resource('hooks'),
   hooksBackupsDir:  new Resource('hooks/.backups'),
-}
+  hooksDir:  new Resource('hooks'),
+};

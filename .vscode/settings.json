@@ -5,6 +5,7 @@
     "**/.git": true,
     "**/.svn": true,
     "**/.DS_Store": true,
+    "dist": true,
     ".idea": true
   },
   "editor.tabSize": 2,

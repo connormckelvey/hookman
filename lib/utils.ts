@@ -1,7 +1,10 @@
+import * as FS from 'fs';
+import * as Path from 'path';
+
 import * as Yargs from 'yargs';
 import * as Inquirer from 'inquirer';
 
-import { Resource } from './resources';
+import Resources, { Resource } from './resources';
 
 function pad2(n: number) {
   return (n < 10 ? '0' : '') + n;
@@ -33,13 +36,13 @@ export interface PromptResponse extends Inquirer.Answers {
 
 export async function replaceOrAbort(resource: Resource, abortMessage: string) {
   const prompt = {
-    type: 'confirm',
-    name: 'shouldReplace',
-    message: `${resource.name} already exists. Would you like to replace it?`,
     default: false,
+    message: `${resource.name} already exists. Would you like to replace it?`,
+    name: 'shouldReplace',
+    type: 'confirm',
   };
 
-  if(resource.exists) {
+  if (resource.exists) {
     const response = (await Inquirer.prompt([prompt])) as PromptResponse;
     if (!response.shouldReplace) {
       console.log(abortMessage);
@@ -65,11 +68,27 @@ export const hookList = [
   'update', 
   'post-update', 
   'pre-auto-gc', 
-  'post-rewrite' 
+  'post-rewrite',
 ];
 
 export const asyncWrapper = (command: Function) => (argv: Yargs.Argv) => { 
   return new Promise((resolve, reject) => {
     command(argv).then(resolve);
   });
+};
+
+export function getPackageJSON() {
+  let currentDir = __dirname;
+  let packageJSONPath = () => Path.join(currentDir, 'package.json');
+  while (!FS.existsSync(packageJSONPath())) {
+    currentDir = Path.join(currentDir, '..');
+  }
+  return require(packageJSONPath());
+}
+
+export const hookmanAlreadyInstalled = () => {
+  return Resources.gitDir.exists && 
+  Resources.hookmanFile.exists && 
+  Resources.hooksDir.exists && 
+  Resources.hooksDir.files.length;
 };

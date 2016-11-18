@@ -1,37 +1,35 @@
 import * as FS from 'mz/fs';
-import * as Path from 'path';
 
 import * as Inquirer from 'inquirer';
 
-import Resources, { Resource } from './resources';
+import { Resource } from './resources';
 import Templates from './templates';
 
 import {
   PromptResponse, 
   replaceOrAbort, 
-  getTimestamp, 
   operationSuccess as success, 
   operationFailure as failure, 
   hookList } from './utils';
 
-const abortMessage = 'Hook creatiom aborted';
+const abortMessage = 'Hook creation aborted';
 
 export async function promptForHookName() {
   const prompt = {
-    type: 'list',
-    name: 'chosenHook',
-    message: 'Which type of hook would you like to create?',
     choices: hookList,
-  }
+    message: 'Which type of hook would you like to create?',
+    name: 'chosenHook',
+    type: 'list',
+  };
 
   const response = (await Inquirer.prompt([prompt])) as PromptResponse;
   return response.chosenHook;
 }
 
 export async function createHook(hook: Resource) {
-  await replaceOrAbort(hook, abortMessage)
+  await replaceOrAbort(hook, abortMessage);
   try {
-    await FS.writeFile(hook.path, Templates.userHook.contents)
+    await FS.writeFile(hook.path, Templates.userHook.contents);
     success(`${hook.name} hook created`);
   } catch (e) {
     failure(`${hook.name} hook could not be created`, e);

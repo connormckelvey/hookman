@@ -52,9 +52,24 @@ function createHooksBackupsDir() {
     });
 }
 exports.createHooksBackupsDir = createHooksBackupsDir;
+function createGitHooksDir() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield FS.mkdir(resources_1.default.gitHooksDir.path);
+            utils_1.operationSuccess('git hooks directory created');
+        }
+        catch (e) {
+            utils_1.operationFailure(`git hooks directory could not be created, please create a "hooks" directory in ${resources_1.default.gitDir.path}`, e);
+        }
+    });
+}
+exports.createGitHooksDir = createGitHooksDir;
 function backupExistingGitHooks() {
     return __awaiter(this, void 0, void 0, function* () {
         const subFolder = Path.join(resources_1.default.hooksBackupsDir.path, utils_1.getTimestamp());
+        if (resources_1.default.gitHooksDir.files.length === 0) {
+            return utils_1.operationSuccess('no existing git hooks to back up');
+        }
         try {
             yield FS.mkdir(subFolder);
             for (let fileName of resources_1.default.gitHooksDir.files) {
@@ -98,4 +113,4 @@ function makeHookEntriesExecutable() {
     });
 }
 exports.makeHookEntriesExecutable = makeHookEntriesExecutable;
-//# sourceMappingURL=initializer.js.map
+//# sourceMappingURL=setup.js.map

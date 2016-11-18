@@ -7,7 +7,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments)).next());
     });
 };
+const FS = require('fs');
+const Path = require('path');
 const Inquirer = require('inquirer');
+const resources_1 = require('./resources');
 function pad2(n) {
     return (n < 10 ? '0' : '') + n;
 }
@@ -33,10 +36,10 @@ exports.operationFailure = operationFailure;
 function replaceOrAbort(resource, abortMessage) {
     return __awaiter(this, void 0, void 0, function* () {
         const prompt = {
-            type: 'confirm',
-            name: 'shouldReplace',
-            message: `${resource.name} already exists. Would you like to replace it?`,
             default: false,
+            message: `${resource.name} already exists. Would you like to replace it?`,
+            name: 'shouldReplace',
+            type: 'confirm',
         };
         if (resource.exists) {
             const response = (yield Inquirer.prompt([prompt]));
@@ -64,11 +67,26 @@ exports.hookList = [
     'update',
     'post-update',
     'pre-auto-gc',
-    'post-rewrite'
+    'post-rewrite',
 ];
 exports.asyncWrapper = (command) => (argv) => {
     return new Promise((resolve, reject) => {
         command(argv).then(resolve);
     });
+};
+function getPackageJSON() {
+    let currentDir = __dirname;
+    let packageJSONPath = () => Path.join(currentDir, 'package.json');
+    while (!FS.existsSync(packageJSONPath())) {
+        currentDir = Path.join(currentDir, '..');
+    }
+    return require(packageJSONPath());
+}
+exports.getPackageJSON = getPackageJSON;
+exports.hookmanAlreadyInstalled = () => {
+    return resources_1.default.gitDir.exists &&
+        resources_1.default.hookmanFile.exists &&
+        resources_1.default.hooksDir.exists &&
+        resources_1.default.hooksDir.files.length;
 };
 //# sourceMappingURL=utils.js.map

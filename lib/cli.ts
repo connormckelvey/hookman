@@ -1,16 +1,13 @@
 import * as Yargs from 'yargs';
+import { getPackageJSON } from './utils';
 
-import { asyncWrapper } from './utils';
-import * as Commands from './commands';
+const meta = getPackageJSON();
 
 const App = Yargs
   .usage('$0 <cmd> [args]')
-  .command('init', 'Set up hookman', {}, asyncWrapper(Commands.init))
-  .command('create', 'Create new hook executable', {}, asyncWrapper(Commands.create))
-  .command('install', 'Install scripts to .git', {}, (argv: Yargs.Argv) => {
-    console.log('hello', argv.name, 'welcome to yargs!')
-  })
+  .commandDir('commands')
   .help()
+  .version(meta.version)
   .argv;
 
 export default App;

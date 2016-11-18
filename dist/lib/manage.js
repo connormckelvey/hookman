@@ -11,14 +11,14 @@ const FS = require('mz/fs');
 const Inquirer = require('inquirer');
 const templates_1 = require('./templates');
 const utils_1 = require('./utils');
-const abortMessage = 'Hook creatiom aborted';
+const abortMessage = 'Hook creation aborted';
 function promptForHookName() {
     return __awaiter(this, void 0, void 0, function* () {
         const prompt = {
-            type: 'list',
-            name: 'chosenHook',
-            message: 'Which type of hook would you like to create?',
             choices: utils_1.hookList,
+            message: 'Which type of hook would you like to create?',
+            name: 'chosenHook',
+            type: 'list',
         };
         const response = (yield Inquirer.prompt([prompt]));
         return response.chosenHook;
@@ -50,4 +50,4 @@ function makeHookExecutable(hook) {
     });
 }
 exports.makeHookExecutable = makeHookExecutable;
-//# sourceMappingURL=creator.js.map
+//# sourceMappingURL=manage.js.map

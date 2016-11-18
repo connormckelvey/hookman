@@ -45,7 +45,7 @@ exports.default = {
     gitDir: new Resource('.git'),
     gitHooksDir: new Resource('.git/hooks'),
     hookmanFile: new Resource('hookman.json'),
-    hooksDir: new Resource('hooks'),
     hooksBackupsDir: new Resource('hooks/.backups'),
+    hooksDir: new Resource('hooks'),
 };
 //# sourceMappingURL=resources.js.map

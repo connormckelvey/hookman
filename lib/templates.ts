@@ -7,4 +7,4 @@ export default {
   hook: new Resource('hook', templatesDir), 
   hookmanFile: new Resource('hookman.json', templatesDir), 
   userHook: new Resource('userHook', templatesDir), 
-}
+};
