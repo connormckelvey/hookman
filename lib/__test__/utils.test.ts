@@ -49,8 +49,6 @@ describe('Utils', () => {
       assert.equal(promptStub.args[0][0][0].message, 'fixture.ts already exists. Would you like to replace it?');
       assert.equal(promptStub.args[0][0][0].name, 'shouldReplace');
       assert.equal(promptStub.args[0][0][0].type, 'confirm');
-
-      assert.deepEqual(processStub.args, [[0]]);
     });
 
     it('returns with confimation', async () => {
