@@ -11,44 +11,27 @@ const hookExecutable = path.join(userHooks, hookName)
 const hookExecutableExists = fs.existsSync(hookExecutable); 
 const hookScript = hookFile[hookName]; 
 
+function handler(error, stdout, stderr) {
+
+  if(stdout) {
+    console.log(stdout);
+  }
+
+  if(stderr) {
+    console.log(stderr);
+  }
+  if (error || stderr) {
+    console.log(`Hookman: ${hookName} check failed.`);
+    process.exit(1); 
+  }
+
+  process.exit(0);    
+}
+
 if (hookScript) {
-  const child = exec(hookScript, function (error, stdout, stderr) {
-    
-    if (stderr) {
-      console.log(stderr);
-      process.exit(1);
-    }
-
-    if (stdout) {
-      console.log(stdout);
-    }
-
-    if (error) {
-      console.error('An error occured, please make sure your hookfile contains a valid command.');
-      process.exit(1); 
-    }
-
-    process.exit(0);    
-  });
+  const child = exec(hookScript, handler);
 }
 
 if (hookExecutableExists) {
-  const child = execFile(hookExecutable, [], function (error, stdout, stderr) {
-    
-    if (stderr) {
-      console.log(stderr);
-      process.exit(1);
-    }
-
-    if (stdout) {
-      console.log(stdout);
-    }
-
-    if (error) {
-      console.error('An error occured, please make sure your hook files have the correct permissions.');
-      process.exit(1); 
-    }
-
-    process.exit(0);    
-  });
+  const child = execFile(hookExecutable, [], handler);
 }

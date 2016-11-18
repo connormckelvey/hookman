@@ -113,4 +113,3 @@ function makeHookEntriesExecutable() {
     });
 }
 exports.makeHookEntriesExecutable = makeHookEntriesExecutable;
-//# sourceMappingURL=setup.js.map

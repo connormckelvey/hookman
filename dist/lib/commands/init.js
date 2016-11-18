@@ -36,4 +36,3 @@ exports.command = 'init';
 exports.desc = 'Set up hookman';
 exports.builder = {};
 exports.handler = utils_1.asyncWrapper(init);
-//# sourceMappingURL=init.js.map

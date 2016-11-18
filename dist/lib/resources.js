@@ -48,4 +48,3 @@ exports.default = {
     hooksBackupsDir: new Resource('hooks/.backups'),
     hooksDir: new Resource('hooks'),
 };
-//# sourceMappingURL=resources.js.map

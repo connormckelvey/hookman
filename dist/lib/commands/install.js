@@ -33,4 +33,3 @@ exports.command = 'install';
 exports.desc = 'Configure existing hook files with git';
 exports.builder = {};
 exports.handler = utils_1.asyncWrapper(install);
-//# sourceMappingURL=install.js.map

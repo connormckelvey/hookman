@@ -7,7 +7,7 @@
     "target": "es6",
     "outDir": "./dist/",
     "allowJs": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "pretty": true
   },
   "exclude": [

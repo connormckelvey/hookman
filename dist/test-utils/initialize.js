@@ -8,4 +8,3 @@ beforeEach(() => {
 afterEach(() => {
     sandbox.restore();
 });
-//# sourceMappingURL=initialize.js.map

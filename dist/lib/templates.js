@@ -8,4 +8,3 @@ exports.default = {
     hookmanFile: new resources_1.Resource('hookman.json', templatesDir),
     userHook: new resources_1.Resource('userHook', templatesDir),
 };
-//# sourceMappingURL=templates.js.map

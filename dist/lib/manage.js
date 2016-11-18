@@ -50,4 +50,3 @@ function makeHookExecutable(hook) {
     });
 }
 exports.makeHookExecutable = makeHookExecutable;
-//# sourceMappingURL=manage.js.map

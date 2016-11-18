@@ -10,4 +10,3 @@ const App = Yargs
     .argv;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = App;
-//# sourceMappingURL=cli.js.map

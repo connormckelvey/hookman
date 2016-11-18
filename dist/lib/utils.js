@@ -89,4 +89,3 @@ exports.hookmanAlreadyInstalled = () => {
         resources_1.default.hooksDir.exists &&
         resources_1.default.hooksDir.files.length;
 };
-//# sourceMappingURL=utils.js.map

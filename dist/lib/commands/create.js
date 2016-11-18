@@ -29,4 +29,3 @@ exports.command = 'create';
 exports.desc = 'Create new hook executable';
 exports.builder = {};
 exports.handler = utils_1.asyncWrapper(create);
-//# sourceMappingURL=create.js.map
