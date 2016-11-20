@@ -1,0 +1,99 @@
+#!/usr/bin/env node 
+const os = require('os');
+const fs = require('fs');
+const path = require('path');
+const exec = require('child_process').execSync;
+
+function parse(str) {
+	const reBashHistory = /^: \d+:0;/;
+
+	return str.trim().split('\n').map(x => {
+		if (reBashHistory.test(x)) {
+			return x.split(';').slice(1).join(';');
+		}
+
+		// ZSH just places one command on each line
+		return x;
+	});
+}
+
+function getPath(opts) {
+	opts = opts || {};
+
+	if (process.platform === 'win32') {
+		return '';
+	}
+
+	if (process.env.HISTFILE) {
+		return process.env.HISTFILE;
+	}
+
+	const homeDir = os.homedir();
+
+	const paths = new Set([
+		path.join(homeDir, '.bash_history'),
+		path.join(homeDir, '.zsh_history'),
+		path.join(homeDir, '.history')
+	]);
+
+	if (opts.extraPaths) {
+		for (const path of opts.extraPaths) {
+			paths.add(path);
+		}
+	}
+
+  return Array.from(paths).map(fp => {
+		try {
+			return {fp, size: fs.statSync(fp).size};
+		} catch (err) {
+			return;
+		}
+	})
+  .filter((item) => item && item.size && item)
+  .reduce((a, b) => {
+    return (a.size > b.size ? a : b).fp
+  });   
+} 
+
+const getHistory = opts => {
+  const p = getPath(opts);
+	return parse(fs.readFileSync(p, 'utf8'));
+};
+
+function checkForTags() {
+  const history = getHistory();
+  const lastCommand = history[history.length - 1].trim();
+
+  if (lastCommand.indexOf('--tags') > -1 || lastCommand.indexOf('--follow-tags') === -1) {
+    console.log('Do not push tags seperatly. Use --follow-tags');
+    process.exit(1);
+    return;
+  } 
+}
+
+function runTests() {
+  try {
+    console.log(exec('npm run lint && npm t').toString());  
+  } catch (err) {
+    console.log(err.stdout);
+    console.log(err.stderr);
+    process.exit(1);
+  }
+}
+
+function bumpVersion() {
+  try { 
+    const result = exec('npm version patch');
+    console.log(result.toString());  
+  } catch (err) {
+    console.log(err.stdout);
+    console.log(err.stderr);
+    process.exit(1);
+  }
+}
+
+checkForTags();
+runTests();
+bumpVersion();
+
+process.exit(1);
