@@ -1,0 +1,23 @@
+#!/usr/bin/env node 
+const getHistory = require('./lib/getHistory.js');
+const exec = require('child_process').execSync;
+
+function bumpVersion() {
+  try { 
+    const result = exec('npm version patch');
+    console.log(result.toString());  
+  } catch (err) {
+    console.log(err.stdout);
+    console.log(err.stderr);
+    process.exit(1);
+  }
+}
+
+const history = getHistory();
+const lastCommand = history[history.length - 1];
+
+if (lastCommand !== 'npm version patch') {
+  bumpVersion();
+}
+
+process.exit(0);

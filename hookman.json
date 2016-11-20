@@ -6,7 +6,7 @@
   "pre-push": "",
   "prepare-commit-msg": "",
   "commit-msg": "",
-  "post-commit": "npm version patch",
+  "post-commit": "",
   "pre-rebase": "",
   "post-checkout": "",
   "post-merge": "",
