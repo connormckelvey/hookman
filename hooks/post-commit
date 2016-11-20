@@ -17,7 +17,7 @@ const history = getHistory();
 const lastCommand = history[history.length - 1];
 console.log(lastCommand);
 if (lastCommand !== 'npm version patch') {
-  bumpVersion();
+  // bumpVersion();
 }
 
 process.exit(1);
