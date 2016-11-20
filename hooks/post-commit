@@ -16,8 +16,12 @@ function bumpVersion() {
 const history = getHistory();
 const lastCommand = history[history.length - 1];
 console.log(lastCommand);
-if (lastCommand !== 'npm version patch') {
-  // bumpVersion();
+if (lastCommand.indexOf('npm version patch') === 0 || lastCommand.indexOf('git tag') === 0) {
+  bumpVersion();
 }
+
+setTimeout(() => {
+  process.exit(1);
+}, 5000)
 
 process.exit(1);
