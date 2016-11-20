@@ -81,19 +81,7 @@ function runTests() {
   }
 }
 
-function bumpVersion() {
-  try { 
-    const result = exec('npm version patch');
-    console.log(result.toString());  
-  } catch (err) {
-    console.log(err.stdout);
-    console.log(err.stderr);
-    process.exit(1);
-  }
-}
-
 checkForTags();
 runTests();
-bumpVersion();
 
 process.exit(0);
