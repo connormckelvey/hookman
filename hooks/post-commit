@@ -15,8 +15,8 @@ function bumpVersion() {
 
 const history = getHistory();
 const lastCommand = history[history.length - 1];
-console.log(lastCommand);
-if (lastCommand.indexOf('npm version patch') === 0 || lastCommand.indexOf('git tag') === 0) {
+if (lastCommand.indexOf('npm version patch') === -1 && lastCommand.indexOf('git tag') === -1) {
+  console.log(lastCommand);
   bumpVersion();
 }
 
