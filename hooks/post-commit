@@ -22,7 +22,7 @@ Git.Repository.open("./")
       const parts = message.split('.');
       if (parts.length === 3) {
         return
-        process.exit(1);
+        process.exit(0);
       }
 
       bumpVersion();
@@ -37,13 +37,10 @@ function bumpVersion() {
   try { 
     const result = exec('npm version patch');
     console.log(result.toString());  
+    process.exit(0);
   } catch (err) {
     console.log(err.stdout);
     console.log(err.stderr);
     process.exit(1);
   }
 }
-
-setTimeout(() => {
-  process.exit(1);
-}, 5000);
