@@ -43,6 +43,7 @@
     "@types/yargs": "^6.3.2",
     "chai": "^3.5.0",
     "mocha": "^2.5.3",
+    "nodegit": "^0.16.0",
     "nodemon": "^1.9.2",
     "sinon": "^1.17.4",
     "source-map-support": "^0.4.1",

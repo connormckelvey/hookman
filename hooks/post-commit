@@ -1,6 +1,37 @@
 #!/usr/bin/env node 
-const getHistory = require('./lib/getHistory.js');
 const exec = require('child_process').execSync;
+const path = require('path');
+var Git = require("nodegit");
+
+// Open the repository directory.
+Git.Repository.open("./")
+  .catch(err => console.log(err))
+  .then(function(repo) {
+    return repo.getMasterCommit();
+  })
+  .then(function(firstCommitOnMaster) {
+    var history = firstCommitOnMaster.history();
+
+    var count = 0;
+    history.on("commit", function(commit) {
+      if (++count >= 2) {
+        return;
+      } 
+
+      const message = commit.message().trim();
+      const parts = message.split('.');
+      if (parts.length === 3) {
+        return
+        process.exit(1);
+      }
+
+      bumpVersion();
+      
+    });
+
+    // Start emitting events.
+    history.start();
+  });
 
 function bumpVersion() {
   try { 
@@ -13,15 +44,6 @@ function bumpVersion() {
   }
 }
 
-const history = getHistory();
-const lastCommand = history[history.length - 1];
-if (lastCommand.indexOf('npm version patch') === -1 && lastCommand.indexOf('git tag') === -1) {
-  console.log(lastCommand);
-  // bumpVersion();
-}
-
 setTimeout(() => {
   process.exit(1);
-}, 5000)
-
-process.exit(1);
+}, 5000);
