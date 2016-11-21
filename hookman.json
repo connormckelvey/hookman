@@ -6,7 +6,7 @@
   "pre-push": "",
   "prepare-commit-msg": "",
   "commit-msg": "",
-  "post-commit": "",
+  "post-commit": "echo lol",
   "pre-rebase": "",
   "post-checkout": "",
   "post-merge": "",
