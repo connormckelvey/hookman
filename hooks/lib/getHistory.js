@@ -53,7 +53,7 @@ function getPath(opts) {
   });   
 } 
 
-const getHistory = opts => {
+function getHistory(opts) {
   const p = getPath(opts);
 	return parse(fs.readFileSync(p, 'utf8'));
 };
