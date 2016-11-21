@@ -1,0 +1,29 @@
+#!/usr/bin/env node 
+const getHistory = require('./lib/getHistory.js');
+const exec = require('child_process').execSync;
+
+function checkForTags() {
+  const history = getHistory();
+  const lastCommand = history[history.length - 1].trim();
+
+  if (lastCommand.indexOf('--tags') > -1 || lastCommand.indexOf('--follow-tags') === -1) {
+    console.log('Do not push tags seperatly. Use --follow-tags');
+    process.exit(1);
+    return;
+  } 
+}
+
+function runTests() {
+  try {
+    console.log(exec('npm run lint && npm t').toString());  
+  } catch (err) {
+    console.log(err.stdout);
+    console.log(err.stderr);
+    process.exit(1);
+  }
+}
+
+checkForTags();
+runTests();
+
+process.exit(0);
