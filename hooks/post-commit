@@ -1,0 +1,46 @@
+#!/usr/bin/env node 
+const exec = require('child_process').execSync;
+const path = require('path');
+var Git = require("nodegit");
+
+Git.Repository.open('./')
+  .catch(err => console.log(err))
+  .then(function(repo) {
+    return repo.getMasterCommit();
+  })
+  .then(function(firstCommitOnMaster) {
+    var history = firstCommitOnMaster.history();
+
+    var count = 0;
+
+    history.on("commit", function(commit) {
+      if (++count >= 2) {
+        return;
+        process.exit(0);
+      } 
+
+      const message = commit.message().trim();
+      const parts = message.split('.');
+
+      if (parts.length === 3) {
+        return
+        process.exit(0);
+      }
+
+      bumpVersion();
+    });
+
+    history.start();
+  });
+
+function bumpVersion() {
+  try { 
+    const result = exec('npm version patch');
+    console.log(result.toString());  
+    process.exit(0);
+  } catch (err) {
+    console.log(err.stdout);
+    console.log(err.stderr);
+    process.exit(1);
+  }
+}
