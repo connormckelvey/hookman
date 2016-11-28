@@ -15,8 +15,6 @@
     "lint": "tslint \"./**/*.ts\" --exclude \"{./node_modules/**,./**/*.d.ts}\"",
     "prepublish": "npm run build",
     "test": "npm run build && npm run test:fast",
-    "test:ci": "npm run build && npm run test:ci:fast",
-    "test:ci:fast": "mocha --require source-map-support/register --timeout 30000 --reporter mocha-multi --harmony --recursive dist/test-utils/initialize.js $(find ./dist/ -type d -name __test__)",
     "test:fast": "export NODE_ENV=test && mocha --require source-map-support/register --timeout 100000 --harmony --recursive dist/test-utils/initialize.js $(find ./dist/ -type d -name __test__)",
     "test:debug": "npm run build && export NODE_ENV=test && npm run db:migrate && mocha --debug --debug-brk --timeout 20000 --harmony --recursive $(find ./dist/ -type d -name __test__)",
     "watch": "nodemon -e ts --ignore 'dist/' -x 'npm run build'"
