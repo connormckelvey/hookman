@@ -51,15 +51,14 @@
     "tslint": "^3.14.0",
     "typescript": "^2.0.2"
   },
-  "preferGlobal": true,
-  "bin": {
-    "hookman": "./bin/hookman"
-  },
   "dependencies": {
     "colors": "^1.1.2",
     "inquirer": "^1.2.3",
     "mz": "^2.5.0",
-    "proxyquire": "^1.7.10",
     "yargs": "^6.3.0"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "hookman": "./bin/hookman"
   }
 }
