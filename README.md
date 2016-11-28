@@ -1,6 +1,6 @@
 # Hookman ![Build Status](https://travis-ci.org/connormckelvey/hookman.svg?branch=master)
 
-Hookman is a Commnad Line Tool that helps your team manage and distribute commands and 
+Hookman is a Command Line Tool that helps your team manage and distribute commands and 
 scripts used within your Git workflow.
 
 ## Requirements
