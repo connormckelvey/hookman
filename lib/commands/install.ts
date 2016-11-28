@@ -17,6 +17,10 @@ const install = async(argv: Yargs.Argv) => {
     failure('Hookman is not yet configured for this project.');
     return;
   }
+
+  if (!Resources.hooksBackupsDir.exists) {
+    await Setup.createHooksBackupsDir();
+  }
     
   await Setup.backupExistingGitHooks();
   await Setup.createHookEntries();
